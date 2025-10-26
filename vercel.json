@@ -1,0 +1,7 @@
+{
+  "buildCommand": "cd prompt-marketplace && npm run build",
+  "outputDirectory": "prompt-marketplace/.next",
+  "installCommand": "cd prompt-marketplace && npm install",
+  "devCommand": "cd prompt-marketplace && npm run dev",
+  "framework": "nextjs"
+}
