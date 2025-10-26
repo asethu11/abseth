@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run load-data && tsc && vite build",
+    "build": "tsc && vite build",
     "build:no-data": "tsc && vite build",
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
     "setup-db": "node scripts/setup-database.js",
     "load-data": "node scripts/load-json-to-db.js",
-    "rebuild-db": "npm run load-data && npm run build"
+    "export-data": "node scripts/export-db-to-json.js",
+    "rebuild-db": "npm run load-data && npm run export-data && npm run build"
   },
   "dependencies": {
     "@prisma/client": "^6.18.0",
