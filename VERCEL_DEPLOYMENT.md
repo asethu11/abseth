@@ -1,42 +1,101 @@
-# Vercel Deployment Instructions
+# Vercel Deployment Instructions for Abseth
+
+## Project Overview
+This is a **Vite + React** application (not Next.js) built in the root directory. The app is a prompt library with 1,767 unique AI prompts.
 
 ## Automatic Fix Applied
-The `vercel.json` file has been updated in the root to properly configure deployment for the Next.js app in the `prompt-marketplace` subdirectory.
+The `vercel.json` file has been configured to properly deploy the Vite application.
 
-## Manual Configuration (Alternative)
+## Configuration Details
 
-If you still encounter issues, you can configure Vercel through the dashboard:
+### What Changed:
+- **Build Command**: `npm run build` (builds the Vite app in the root)
+- **Output Directory**: `dist` (Vite's default output folder)
+- **Install Command**: `npm install`
+- **Framework**: None (static site)
+- **SPA Routing**: Configured to serve `index.html` for all routes
 
-### Option 1: Set Root Directory (Recommended)
-1. Go to your Vercel project settings
-2. Navigate to **Settings** → **General**
-3. Find the **Root Directory** section
-4. Set it to: `prompt-marketplace`
-5. Save the changes
-6. Redeploy your project
-
-### Option 2: Use the Root vercel.json
-The current `vercel.json` in the root should automatically handle the subdirectory build.
-
-## What Was Fixed
-- Added `buildCommand` to build from the `prompt-marketplace` directory
-- Added `outputDirectory` pointing to `prompt-marketplace/.next`
-- Added `installCommand` to install dependencies from the subdirectory
-- Added `framework: "nextjs"` to explicitly tell Vercel this is a Next.js project
+### Rewrites Configuration:
+All routes are rewritten to `/index.html` to support client-side routing in a Single Page Application (SPA).
 
 ## Build Process
-When you push to your repository, Vercel will:
-1. Install dependencies from `prompt-marketplace/package.json`
-2. Run the build command in the `prompt-marketplace` directory
-3. Use the `.next` folder in `prompt-marketplace/.next` as the output
+When you deploy to Vercel:
+
+1. **Install**: `npm install` - Installs all dependencies from root `package.json`
+2. **Build**: `npm run build` - Builds the React app with Vite
+3. **Output**: Serves files from the `dist` directory
+4. **Routing**: All requests are routed to `index.html` for SPA support
+
+## Key Dependencies
+- **React** 18.2.0
+- **TypeScript** 5.2.2
+- **Vite** 5.0.8
+- **better-sqlite3** 9.2.2 (for database operations)
 
 ## Testing Locally
-To test the build locally:
+
+### Development:
 ```bash
-cd prompt-marketplace
-npm install
-npm run build
-npm run start
+npm run dev
+# Opens at http://localhost:3000 or http://localhost:3001
 ```
 
-The app should be available at `http://localhost:3000` (or the port Next.js assigns).
+### Production Build:
+```bash
+npm run build
+npm run preview
+# Previews the production build
+```
+
+## Deployment Steps
+
+### Option 1: GitHub Integration (Recommended)
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Vercel will automatically detect the configuration
+4. Deploy!
+
+### Option 2: Vercel CLI
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+
+# Or deploy to production
+vercel --prod
+```
+
+## Environment Variables
+If you need any environment variables, add them in:
+- Vercel Dashboard → Settings → Environment Variables
+
+## Build Output
+After a successful build, Vercel will serve:
+- `index.html` - Main entry point
+- `assets/` - JavaScript and CSS bundles
+- Other static assets
+
+## Troubleshooting
+
+### Issue: Build fails
+**Solution**: Make sure all dependencies are in `package.json` and there are no TypeScript errors.
+
+### Issue: 404 on routes
+**Solution**: The rewrites in `vercel.json` handle this. Make sure the configuration is correct.
+
+### Issue: Large bundle size
+**Solution**: The app uses lazy loading for the full dataset (1,767 prompts). The initial bundle is optimized.
+
+## Performance
+- **Initial Bundle**: ~50-60KB gzipped
+- **Lazy Load**: Full dataset loads on demand (18.3 MB)
+- **Build Time**: ~1-2 seconds
+- **Deployment**: ~30-60 seconds
+
+## Support
+If you encounter any issues:
+1. Check Vercel deployment logs
+2. Verify build succeeds locally: `npm run build`
+3. Ensure all environment variables are set
