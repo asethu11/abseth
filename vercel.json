@@ -1,33 +1,8 @@
 {
-  "functions": {
-    "api/prompts/route.js": {
-      "maxDuration": 10
-    },
-    "api/prompts/[id]/route.js": {
-      "maxDuration": 10
-    },
-    "api/statistics/route.js": {
-      "maxDuration": 10
-    },
-    "api/categories/route.js": {
-      "maxDuration": 10
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/((?!api/).*)",
-      "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg))",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    }
-  ]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd prompt-marketplace && npm run build",
+  "outputDirectory": "prompt-marketplace/.next",
+  "installCommand": "cd prompt-marketplace && npm install",
+  "devCommand": "cd prompt-marketplace && npm run dev",
+  "framework": "nextjs"
 }
