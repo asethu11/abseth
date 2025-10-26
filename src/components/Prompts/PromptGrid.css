@@ -1,0 +1,222 @@
+/* Prompt Grid Component Styles */
+
+.prompt-grid {
+  width: 100%;
+  max-width: 100%;
+}
+
+.prompt-grid__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.prompt-grid__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.prompt-grid__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.prompt-grid__filter-info {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.prompt-grid__content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.prompt-grid__content > * {
+  animation: fadeIn 0.3s ease-out;
+  animation-fill-mode: both;
+}
+
+.prompt-grid__content > *:nth-child(1) { animation-delay: 0.1s; }
+.prompt-grid__content > *:nth-child(2) { animation-delay: 0.2s; }
+.prompt-grid__content > *:nth-child(3) { animation-delay: 0.3s; }
+.prompt-grid__content > *:nth-child(4) { animation-delay: 0.4s; }
+.prompt-grid__content > *:nth-child(5) { animation-delay: 0.5s; }
+.prompt-grid__content > *:nth-child(6) { animation-delay: 0.6s; }
+
+.prompt-grid__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+}
+
+.prompt-grid__loading-text {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+}
+
+/* Responsive Grid */
+@media (min-width: 640px) {
+  .prompt-grid__content {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .prompt-grid__content {
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .prompt-grid__content {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .prompt-grid__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+  
+  .prompt-grid__title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .prompt-grid__content {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}
+
+/* Loading Skeleton */
+.prompt-grid__skeleton {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-6);
+}
+
+.prompt-grid__skeleton-card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--card-radius);
+  padding: var(--space-6);
+  height: 280px;
+}
+
+.prompt-grid__skeleton-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.prompt-grid__skeleton-category {
+  width: 80px;
+  height: 24px;
+  background: linear-gradient(90deg, var(--color-bg-tertiary) 25%, var(--color-bg-hover) 50%, var(--color-bg-tertiary) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: var(--radius-full);
+}
+
+.prompt-grid__skeleton-models {
+  width: 60px;
+  height: 20px;
+  background: linear-gradient(90deg, var(--color-bg-tertiary) 25%, var(--color-bg-hover) 50%, var(--color-bg-tertiary) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+.prompt-grid__skeleton-title {
+  width: 100%;
+  height: 24px;
+  background: linear-gradient(90deg, var(--color-bg-tertiary) 25%, var(--color-bg-hover) 50%, var(--color-bg-tertiary) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-2);
+}
+
+.prompt-grid__skeleton-title--short {
+  width: 70%;
+}
+
+.prompt-grid__skeleton-description {
+  width: 100%;
+  height: 16px;
+  background: linear-gradient(90deg, var(--color-bg-tertiary) 25%, var(--color-bg-hover) 50%, var(--color-bg-tertiary) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-1);
+}
+
+.prompt-grid__skeleton-description--short {
+  width: 85%;
+}
+
+.prompt-grid__skeleton-tags {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.prompt-grid__skeleton-tag {
+  width: 60px;
+  height: 20px;
+  background: linear-gradient(90deg, var(--color-bg-tertiary) 25%, var(--color-bg-hover) 50%, var(--color-bg-tertiary) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+.prompt-grid__skeleton-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-primary);
+}
+
+.prompt-grid__skeleton-date {
+  width: 80px;
+  height: 14px;
+  background: linear-gradient(90deg, var(--color-bg-tertiary) 25%, var(--color-bg-hover) 50%, var(--color-bg-tertiary) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+.prompt-grid__skeleton-action {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(90deg, var(--color-bg-tertiary) 25%, var(--color-bg-hover) 50%, var(--color-bg-tertiary) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

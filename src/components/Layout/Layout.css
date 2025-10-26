@@ -1,0 +1,25 @@
+/* Layout Component Styles */
+
+.layout-container {
+  display: grid;
+  grid-template-areas: 
+    "header header"
+    "sidebar main";
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--header-height) 1fr;
+  min-height: 100vh;
+  background-color: var(--color-bg-primary);
+}
+
+.layout-container--collapsed {
+  grid-template-columns: var(--sidebar-width-collapsed) 1fr;
+}
+
+@media (max-width: 1023px) {
+  .layout-container {
+    grid-template-areas: 
+      "header"
+      "main";
+    grid-template-columns: 1fr;
+  }
+}
