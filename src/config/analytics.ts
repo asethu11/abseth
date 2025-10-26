@@ -1,7 +1,7 @@
 // Google Analytics Configuration
 export const GA_CONFIG = {
   // Google Analytics Measurement ID
-  MEASUREMENT_ID: 'G-Y9542M0PX9',
+  MEASUREMENT_ID: 'G-NJBNV4HX1R',
   
   // Enable/disable analytics (useful for development)
   ENABLED: process.env.NODE_ENV === 'production',
