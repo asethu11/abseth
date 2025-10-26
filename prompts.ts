@@ -44,7 +44,8 @@ export async function searchPrompts(query: string): Promise<Prompt[]> {
     prompt.description.toLowerCase().includes(searchTerm) ||
     prompt.fullPrompt.toLowerCase().includes(searchTerm) ||
     prompt.category.toLowerCase().includes(searchTerm) ||
-    prompt.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+    prompt.tags.some(tag => tag.toLowerCase().includes(searchTerm)) ||
+    prompt.compatibleModels.some(model => model.toLowerCase().includes(searchTerm))
   );
 }
 
