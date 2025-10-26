@@ -6,6 +6,7 @@ import PromptGrid from './components/Prompts/PromptGrid'
 import PromptDetail from './components/Prompts/PromptDetail'
 import { Prompt } from '../types'
 import { getAllPrompts, searchPrompts, getStatistics, getPromptsByCategory } from '../prompts'
+import { useGoogleAnalytics } from './hooks/useGoogleAnalytics'
 
 const ITEMS_PER_PAGE = 20
 
@@ -22,6 +23,14 @@ function App() {
   const [offset, setOffset] = useState(0)
   const [filteredOffset, setFilteredOffset] = useState(0)
   const [stats, setStats] = useState({ totalPrompts: 0, categories: {} })
+  
+  // Initialize Google Analytics
+  const { trackPageView, trackPromptView, trackPromptSearch, trackCategoryFilter, trackPromptSubmit, trackLoadMore } = useGoogleAnalytics()
+
+  // Track initial page view
+  useEffect(() => {
+    trackPageView('/', 'Prompt Library - Home')
+  }, [trackPageView])
 
   // Load initial data with pagination
   useEffect(() => {
@@ -54,6 +63,9 @@ function App() {
     try {
       setIsLoadingMore(true)
       
+      // Track load more event
+      trackLoadMore(filteredPrompts.length)
+      
       // If we have filters, load from allFilteredPrompts
       if (searchQuery.trim() || selectedCategory) {
         const newOffset = filteredOffset + ITEMS_PER_PAGE
@@ -77,7 +89,7 @@ function App() {
     } finally {
       setIsLoadingMore(false)
     }
-  }, [offset, filteredOffset, hasMore, isLoadingMore, searchQuery, selectedCategory, allFilteredPrompts])
+  }, [offset, filteredOffset, hasMore, isLoadingMore, searchQuery, selectedCategory, allFilteredPrompts, filteredPrompts.length, trackLoadMore])
 
   // Handle search and filtering with memoization
   const filteredPromptsMemo = useMemo(() => {
@@ -124,6 +136,14 @@ function App() {
         // Store all filtered results
         setAllFilteredPrompts(results)
         
+        // Track search events
+        if (searchQuery.trim()) {
+          trackPromptSearch(searchQuery, results.length)
+        }
+        if (selectedCategory) {
+          trackCategoryFilter(selectedCategory)
+        }
+        
         // Show first page of filtered results
         const firstPage = results.slice(0, ITEMS_PER_PAGE)
         setFilteredPrompts(firstPage)
@@ -149,13 +169,18 @@ function App() {
 
   const handlePromptSelect = useCallback((prompt: Prompt) => {
     setSelectedPrompt(prompt)
-  }, [])
+    // Track prompt view
+    trackPromptView(prompt.id, prompt.title, prompt.category)
+  }, [trackPromptView])
 
   const handleCloseDetail = useCallback(() => {
     setSelectedPrompt(null)
   }, [])
 
   const handlePromptSubmitted = useCallback(async () => {
+    // Track prompt submission
+    trackPromptSubmit()
+    
     // Reload prompts and statistics after a new prompt is submitted
     try {
       const [promptsData, statistics] = await Promise.all([
@@ -175,7 +200,7 @@ function App() {
     } catch (error) {
       console.error('Error refreshing prompts:', error)
     }
-  }, [])
+  }, [trackPromptSubmit])
 
   return (
     <Layout>

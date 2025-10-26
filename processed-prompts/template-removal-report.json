@@ -1,0 +1,196 @@
+{
+  "originalCount": 5081,
+  "finalCount": 5036,
+  "removedCount": 2,
+  "removalReasons": {
+    "Template structure only": 2
+  },
+  "removedPrompts": [
+    {
+      "title": "Gemini-2.5-Pro-04-18-2025",
+      "reason": "Template structure only",
+      "contentLength": 120
+    },
+    {
+      "title": "API_DOCUMENTATION",
+      "reason": "Template structure only",
+      "contentLength": 320
+    }
+  ],
+  "additionalRemovalCount": 43,
+  "totalRemovedCount": 45,
+  "additionalRemovedPrompts": [
+    {
+      "title": "integration_guide",
+      "contentLength": 6812
+    },
+    {
+      "title": "Python Prompt",
+      "contentLength": 4395
+    },
+    {
+      "title": "behaviour-article-writer",
+      "contentLength": 199
+    },
+    {
+      "title": "US-001-user-story-film-query",
+      "contentLength": 371
+    },
+    {
+      "title": "profiling-problem-analysis-20250627",
+      "contentLength": 340
+    },
+    {
+      "title": "profiling-comparison-analysis-20250628",
+      "contentLength": 398
+    },
+    {
+      "title": "deepseek",
+      "contentLength": 354
+    },
+    {
+      "title": "openai-chatgpt4-android_20240207",
+      "contentLength": 63
+    },
+    {
+      "title": "xAI-grok3_20250423",
+      "contentLength": 1158
+    },
+    {
+      "title": "xAI-grok3_20250504",
+      "contentLength": 563
+    },
+    {
+      "title": "claude-code-hook-architect",
+      "contentLength": 348
+    },
+    {
+      "title": "maestro-test-expert",
+      "contentLength": 296
+    },
+    {
+      "title": "confirmation-mode",
+      "contentLength": 208
+    },
+    {
+      "title": "github-release",
+      "contentLength": 339
+    },
+    {
+      "title": "entity-template",
+      "contentLength": 94
+    },
+    {
+      "title": "you-are-wow-expert",
+      "contentLength": 193
+    },
+    {
+      "title": "you-are-expert-ts-cli-developer",
+      "contentLength": 295
+    },
+    {
+      "title": "you-are-front-end-developer",
+      "contentLength": 130
+    },
+    {
+      "title": "you-are-plan-act-phase-dev",
+      "contentLength": 224
+    },
+    {
+      "title": "wow-md-docs-best-practices",
+      "contentLength": 130
+    },
+    {
+      "title": "plx-act-file",
+      "contentLength": 481
+    },
+    {
+      "title": "plx-develop-tasks",
+      "contentLength": 61
+    },
+    {
+      "title": "you-are-mvp-expert",
+      "contentLength": 61
+    },
+    {
+      "title": "plx-update-and-transfer-plan",
+      "contentLength": 344
+    },
+    {
+      "title": "flutter-con-annotations",
+      "contentLength": 396
+    },
+    {
+      "title": "flutter-con-exceptions",
+      "contentLength": 285
+    },
+    {
+      "title": "flutter-con-typedefs",
+      "contentLength": 435
+    },
+    {
+      "title": "flutter-ins-localization-pattern",
+      "contentLength": 363
+    },
+    {
+      "title": "flutter-ins-mvvm-architecture",
+      "contentLength": 494
+    },
+    {
+      "title": "flutter-ins-service-locator",
+      "contentLength": 444
+    },
+    {
+      "title": "flutter-ins-turbo-response",
+      "contentLength": 453
+    },
+    {
+      "title": "plx-research",
+      "contentLength": 94
+    },
+    {
+      "title": "plx-create-flutter-unit-tests",
+      "contentLength": 114
+    },
+    {
+      "title": "api-block",
+      "contentLength": 164
+    },
+    {
+      "title": "structured-generator",
+      "contentLength": 303
+    },
+    {
+      "title": "gpt4_CAN_coder",
+      "contentLength": 965
+    },
+    {
+      "title": "super_experts_gpt",
+      "contentLength": 1619
+    },
+    {
+      "title": "AssistantIdeator Data 270525",
+      "contentLength": 992
+    },
+    {
+      "title": "CustomDocGenerator 270525",
+      "contentLength": 3615
+    },
+    {
+      "title": "SyntheticDataCreationAssistant 270525",
+      "contentLength": 2903
+    },
+    {
+      "title": "AssistantIdeator Data 270525",
+      "contentLength": 1949
+    },
+    {
+      "title": "CustomDocGenerator 270525",
+      "contentLength": 4572
+    },
+    {
+      "title": "SyntheticDataCreationAssistant 270525",
+      "contentLength": 3860
+    }
+  ]
+}

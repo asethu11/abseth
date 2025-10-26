@@ -1,0 +1,313 @@
+{
+  "originalCount": 5081,
+  "finalCount": 5081,
+  "recategorizedCount": 593,
+  "recategorizationDetails": [
+    {
+      "title": "Cline",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "terse",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "claude-code-command-agent",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "claude-code-hook-architect",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "test-focus",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "project",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "roadmap",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "content-strategy-template",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "all-dev-carousel-channels",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "all-dev-short-video-channels",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "repo-prompt-prompts-template",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "you-are-prompt-vertaler",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "plx-create-agent-prompt",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "plx-research",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "plx-list-unit-tests",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "firebase-security-rules-block",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "update-roadmap",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "templates",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Business & Professional"
+    },
+    {
+      "title": "Terse",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Claude Code Hook Architect",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Finance Issue",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Marketing Issue",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Operations Issue",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "People Issue",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Sales Issue",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "You Are Tutorial Expert",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "All Dev Carousel Channels",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "All Dev Long Text Channels",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "All Dev Long Video Channels",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "All Dev Short Text Channels",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "All Dev Short Video Channels",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Repo Prompt Prompts Template",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Plx Research",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Result Report Agent",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Story Timeline Block",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Make Agent",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Confirm",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Multiselect",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Select",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Toggle",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Development & Programming"
+    },
+    {
+      "title": "Templates",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Education & Learning"
+    },
+    {
+      "title": "story-timeline-block",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Data & Analytics"
+    },
+    {
+      "title": "you-are-wow-expert",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Data & Analytics"
+    },
+    {
+      "title": "plx-brainstorm",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Data & Analytics"
+    },
+    {
+      "title": "plx-create-feature-flow",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Data & Analytics"
+    },
+    {
+      "title": "plx-create-plan",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Data & Analytics"
+    },
+    {
+      "title": "plx-create-activity-prompt",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Data & Analytics"
+    },
+    {
+      "title": "plx-improve-prompt",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Data & Analytics"
+    },
+    {
+      "title": "plx-suggest-ui-ux-improvements",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Data & Analytics"
+    },
+    {
+      "title": "channel-template",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Business & Professional"
+    },
+    {
+      "title": "analytics-block",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Business & Professional"
+    },
+    {
+      "title": "research-project",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Business & Professional"
+    },
+    {
+      "title": "Issue",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Business & Professional"
+    },
+    {
+      "title": "All Dev Community Channels",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Business & Professional"
+    },
+    {
+      "title": "Make Finance Issue",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Business & Professional"
+    },
+    {
+      "title": "Make Marketing Issue",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Business & Professional"
+    },
+    {
+      "title": "Make Operations Issue",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Business & Professional"
+    },
+    {
+      "title": "Make People Issue",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Business & Professional"
+    },
+    {
+      "title": "Make Sales Issue",
+      "oldCategory": "Creative Writing",
+      "newCategory": "Business & Professional"
+    }
+  ],
+  "finalCategoryBreakdown": {
+    "System Prompts": 3382,
+    "AI & Machine Learning": 434,
+    "Development & Programming": 296,
+    "General Purpose": 341,
+    "Data & Analytics": 51,
+    "Education & Learning": 255,
+    "Security & Testing": 7,
+    "Business & Professional": 300,
+    "Creative Writing": 15
+  }
+}
