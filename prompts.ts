@@ -1,5 +1,5 @@
 import { Prompt, Statistics, CategoryGroup } from './types';
-import promptsData from './src/data/prompts.json';
+import promptsData from './processed-prompts/unique-prompts.json';
 
 // Cache for performance
 let allPromptsCache: Prompt[] | null = null;

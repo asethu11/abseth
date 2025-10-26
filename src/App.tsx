@@ -5,13 +5,14 @@ import Sidebar from './components/Layout/Sidebar'
 import PromptGrid from './components/Prompts/PromptGrid'
 import PromptDetail from './components/Prompts/PromptDetail'
 import { Prompt } from '../types'
-import { getAllPrompts, searchPrompts, getStatistics } from '../prompts'
+import { getAllPrompts, searchPrompts, getStatistics, getPromptsByCategory } from '../prompts'
 
 const ITEMS_PER_PAGE = 20
 
 function App() {
-  const [prompts, setPrompts] = useState<Prompt[]>([])
+  const [, setPrompts] = useState<Prompt[]>([])
   const [filteredPrompts, setFilteredPrompts] = useState<Prompt[]>([])
+  const [allFilteredPrompts, setAllFilteredPrompts] = useState<Prompt[]>([])
   const [selectedPrompt, setSelectedPrompt] = useState<Prompt | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -19,6 +20,7 @@ function App() {
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [hasMore, setHasMore] = useState(false)
   const [offset, setOffset] = useState(0)
+  const [filteredOffset, setFilteredOffset] = useState(0)
   const [stats, setStats] = useState({ totalPrompts: 0, categories: {} })
 
   // Load initial data with pagination
@@ -32,6 +34,7 @@ function App() {
         ])
         setPrompts(promptsData.prompts)
         setFilteredPrompts(promptsData.prompts)
+        setAllFilteredPrompts(promptsData.prompts)
         setHasMore(promptsData.hasMore)
         setStats(statistics)
       } catch (error) {
@@ -50,19 +53,31 @@ function App() {
 
     try {
       setIsLoadingMore(true)
-      const newOffset = offset + ITEMS_PER_PAGE
-      const promptsData = await getAllPrompts(ITEMS_PER_PAGE, newOffset)
       
-      setPrompts(prev => [...prev, ...promptsData.prompts])
-      setFilteredPrompts(prev => [...prev, ...promptsData.prompts])
-      setHasMore(promptsData.hasMore)
-      setOffset(newOffset)
+      // If we have filters, load from allFilteredPrompts
+      if (searchQuery.trim() || selectedCategory) {
+        const newOffset = filteredOffset + ITEMS_PER_PAGE
+        const nextBatch = allFilteredPrompts.slice(newOffset, newOffset + ITEMS_PER_PAGE)
+        
+        setFilteredPrompts(prev => [...prev, ...nextBatch])
+        setFilteredOffset(newOffset)
+        setHasMore(newOffset + ITEMS_PER_PAGE < allFilteredPrompts.length)
+      } else {
+        // No filters, load from all prompts
+        const newOffset = offset + ITEMS_PER_PAGE
+        const promptsData = await getAllPrompts(ITEMS_PER_PAGE, newOffset)
+        
+        setPrompts(prev => [...prev, ...promptsData.prompts])
+        setFilteredPrompts(prev => [...prev, ...promptsData.prompts])
+        setHasMore(promptsData.hasMore)
+        setOffset(newOffset)
+      }
     } catch (error) {
       console.error('Error loading more prompts:', error)
     } finally {
       setIsLoadingMore(false)
     }
-  }, [offset, hasMore, isLoadingMore])
+  }, [offset, filteredOffset, hasMore, isLoadingMore, searchQuery, selectedCategory, allFilteredPrompts])
 
   // Handle search and filtering with memoization
   const filteredPromptsMemo = useMemo(() => {
@@ -76,9 +91,11 @@ function App() {
         // No filter, load paginated data
         try {
           setOffset(0)
+          setFilteredOffset(0)
           const promptsData = await getAllPrompts(ITEMS_PER_PAGE, 0)
           setPrompts(promptsData.prompts)
           setFilteredPrompts(promptsData.prompts)
+          setAllFilteredPrompts(promptsData.prompts)
           setHasMore(promptsData.hasMore)
         } catch (error) {
           console.error('Error loading prompts:', error)
@@ -88,23 +105,34 @@ function App() {
 
       try {
         // Reset pagination for filtered results
-        setOffset(0)
+        setFilteredOffset(0)
         
-        let results = prompts
+        let results: Prompt[] = []
 
-        if (searchQuery.trim()) {
+        if (selectedCategory && searchQuery.trim()) {
+          // Both category and search query
+          const searchResults = await searchPrompts(searchQuery)
+          results = searchResults.filter(prompt => prompt.category === selectedCategory)
+        } else if (selectedCategory) {
+          // Only category filter
+          results = await getPromptsByCategory(selectedCategory)
+        } else if (searchQuery.trim()) {
+          // Only search query
           results = await searchPrompts(searchQuery)
         }
 
-        if (selectedCategory) {
-          results = results.filter(prompt => prompt.category === selectedCategory)
-        }
-
-        setFilteredPrompts(results)
-        setHasMore(false) // Don't show load more for filtered results
+        // Store all filtered results
+        setAllFilteredPrompts(results)
+        
+        // Show first page of filtered results
+        const firstPage = results.slice(0, ITEMS_PER_PAGE)
+        setFilteredPrompts(firstPage)
+        setHasMore(results.length > ITEMS_PER_PAGE)
       } catch (error) {
         console.error('Error filtering prompts:', error)
-        setFilteredPrompts(prompts)
+        setFilteredPrompts([])
+        setAllFilteredPrompts([])
+        setHasMore(false)
       }
     }
 
@@ -136,9 +164,11 @@ function App() {
       ])
       setPrompts(promptsData.prompts)
       setFilteredPrompts(promptsData.prompts)
+      setAllFilteredPrompts(promptsData.prompts)
       setHasMore(promptsData.hasMore)
       setStats(statistics)
       setOffset(0)
+      setFilteredOffset(0)
       
       // Show success notification (you can add a toast notification here)
       console.log('Prompt submitted successfully!')
