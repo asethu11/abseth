@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Initialize database
-const dbPath = path.join(__dirname, '../../prompts.db');
+const dbPath = path.join(__dirname, '../prompts.db');
 const db = new Database(dbPath);
 
 export async function GET(request) {
