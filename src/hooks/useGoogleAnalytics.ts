@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { GA_CONFIG } from '../config/analytics'
 
 // Extend the Window interface to include gtag
