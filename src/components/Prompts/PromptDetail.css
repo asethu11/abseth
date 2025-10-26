@@ -222,6 +222,41 @@
   border: 1px solid var(--color-border-primary);
 }
 
+/* Copied State Styles */
+.btn--copied {
+  background-color: var(--color-bg-tertiary) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-border-primary) !important;
+  transform: scale(1.05);
+  animation: copiedPulse 0.3s ease-out;
+}
+
+/* Primary button (orange) when copied becomes gray */
+.btn--primary.btn--copied {
+  background-color: var(--color-bg-tertiary) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-border-primary) !important;
+}
+
+/* Secondary button (gray) when copied becomes orange */
+.btn--secondary.btn--copied {
+  background-color: var(--color-orange-primary) !important;
+  color: var(--color-text-inverse) !important;
+  border-color: var(--color-orange-primary) !important;
+}
+
+@keyframes copiedPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {

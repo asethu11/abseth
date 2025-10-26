@@ -8,13 +8,19 @@ import './PromptGrid.css'
 interface PromptGridProps {
   prompts: Prompt[]
   isLoading: boolean
+  hasMore?: boolean
+  isLoadingMore?: boolean
   onPromptSelect: (prompt: Prompt) => void
+  onLoadMore?: () => void
 }
 
 const PromptGrid: React.FC<PromptGridProps> = ({ 
   prompts, 
   isLoading, 
-  onPromptSelect 
+  hasMore = false,
+  isLoadingMore = false,
+  onPromptSelect,
+  onLoadMore
 }) => {
   const memoizedPrompts = useMemo(() => prompts, [prompts])
 
@@ -63,6 +69,25 @@ const PromptGrid: React.FC<PromptGridProps> = ({
           />
         ))}
       </div>
+
+      {hasMore && (
+        <div className="prompt-grid__load-more">
+          <button 
+            className="prompt-grid__load-more-btn"
+            onClick={onLoadMore}
+            disabled={isLoadingMore}
+          >
+            {isLoadingMore ? (
+              <>
+                <LoadingSpinner size="sm" />
+                <span>Loading more...</span>
+              </>
+            ) : (
+              'Load More Prompts'
+            )}
+          </button>
+        </div>
+      )}
     </div>
   )
 }

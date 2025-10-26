@@ -137,6 +137,28 @@
   border-top: 1px solid var(--color-border-primary);
 }
 
+.sidebar__submit-btn {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(135deg, var(--color-orange-primary), #ff8a4a);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.sidebar__submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.sidebar__submit-btn:active {
+  transform: translateY(0);
+}
+
 .sidebar__info {
   text-align: center;
 }

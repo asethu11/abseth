@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import { Prompt } from '../../../types'
 import './PromptCard.css'
 
@@ -8,6 +8,7 @@ interface PromptCardProps {
 }
 
 const PromptCard: React.FC<PromptCardProps> = memo(({ prompt, onSelect }) => {
+  const [copied, setCopied] = useState(false)
   const handleClick = () => {
     onSelect(prompt)
   }
@@ -19,6 +20,17 @@ const PromptCard: React.FC<PromptCardProps> = memo(({ prompt, onSelect }) => {
     }
     if (e.key === 'Escape') {
       ;(e.currentTarget as HTMLElement).blur()
+    }
+  }
+
+  const handleCopyPrompt = async (e: React.MouseEvent) => {
+    e.stopPropagation()
+    try {
+      await navigator.clipboard.writeText(prompt.fullPrompt)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (error) {
+      console.error('Failed to copy prompt:', error)
     }
   }
 
@@ -57,40 +69,37 @@ const PromptCard: React.FC<PromptCardProps> = memo(({ prompt, onSelect }) => {
         {prompt.description}
       </p>
 
-      {prompt.tags.length > 0 && (
-        <div className="prompt-card__tags">
-          {prompt.tags.slice(0, 4).map((tag) => (
-            <span key={tag} className="prompt-card__tag">
-              {tag}
-            </span>
-          ))}
-          {prompt.tags.length > 4 && (
-            <span className="prompt-card__tag-more">
-              +{prompt.tags.length - 4}
-            </span>
-          )}
-        </div>
-      )}
-
       <div className="prompt-card__footer">
-        <div className="prompt-card__meta">
-          <span className="prompt-card__date">
-            {new Date(prompt.createdAt).toLocaleDateString()}
-          </span>
-        </div>
+        {prompt.tags.length > 0 && (
+          <div className="prompt-card__tags">
+            {prompt.tags.slice(0, 4).map((tag) => (
+              <span key={tag} className="prompt-card__tag">
+                {tag}
+              </span>
+            ))}
+            {prompt.tags.length > 4 && (
+              <span className="prompt-card__tag-more">
+                +{prompt.tags.length - 4}
+              </span>
+            )}
+          </div>
+        )}
         <div className="prompt-card__actions">
           <button 
-            className="prompt-card__action-btn"
-            onClick={(e) => {
-              e.stopPropagation()
-              navigator.clipboard.writeText(prompt.fullPrompt)
-            }}
-            aria-label="Copy prompt to clipboard"
+            className={`prompt-card__action-btn ${copied ? 'prompt-card__action-btn--copied' : ''}`}
+            onClick={handleCopyPrompt}
+            aria-label={copied ? "Copied!" : "Copy prompt to clipboard"}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
+            {copied ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="20,6 9,17 4,12"></polyline>
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            )}
           </button>
         </div>
       </div>

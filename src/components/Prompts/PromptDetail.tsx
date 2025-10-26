@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Prompt } from '../../../types'
 import './PromptDetail.css'
 
@@ -8,6 +8,8 @@ interface PromptDetailProps {
 }
 
 const PromptDetail: React.FC<PromptDetailProps> = ({ prompt, onClose }) => {
+  const [copiedPrompt, setCopiedPrompt] = useState(false)
+  const [copiedTitle, setCopiedTitle] = useState(false)
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -33,7 +35,8 @@ const PromptDetail: React.FC<PromptDetailProps> = ({ prompt, onClose }) => {
   const handleCopyPrompt = async () => {
     try {
       await navigator.clipboard.writeText(prompt.fullPrompt)
-      // You could add a toast notification here
+      setCopiedPrompt(true)
+      setTimeout(() => setCopiedPrompt(false), 2000)
     } catch (error) {
       console.error('Failed to copy prompt:', error)
     }
@@ -42,6 +45,8 @@ const PromptDetail: React.FC<PromptDetailProps> = ({ prompt, onClose }) => {
   const handleCopyTitle = async () => {
     try {
       await navigator.clipboard.writeText(prompt.title)
+      setCopiedTitle(true)
+      setTimeout(() => setCopiedTitle(false), 2000)
     } catch (error) {
       console.error('Failed to copy title:', error)
     }
@@ -105,24 +110,48 @@ const PromptDetail: React.FC<PromptDetailProps> = ({ prompt, onClose }) => {
               <h3 className="modal__section-title">Full Prompt</h3>
               <div className="modal__prompt-actions">
                 <button 
-                  className="btn btn--secondary btn--sm"
+                  className={`btn btn--secondary btn--sm ${copiedTitle ? 'btn--copied' : ''}`}
                   onClick={handleCopyTitle}
+                  style={{ minWidth: '120px' }}
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                  </svg>
-                  Copy Title
+                  {copiedTitle ? (
+                    <>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="20,6 9,17 4,12"></polyline>
+                      </svg>
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                      </svg>
+                      Copy Title
+                    </>
+                  )}
                 </button>
                 <button 
-                  className="btn btn--primary btn--sm"
+                  className={`btn btn--primary btn--sm ${copiedPrompt ? 'btn--copied' : ''}`}
                   onClick={handleCopyPrompt}
+                  style={{ minWidth: '120px' }}
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                  </svg>
-                  Copy Prompt
+                  {copiedPrompt ? (
+                    <>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="20,6 9,17 4,12"></polyline>
+                      </svg>
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                      </svg>
+                      Copy Prompt
+                    </>
+                  )}
                 </button>
               </div>
             </div>

@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Sidebar.css'
+import SubmitPromptModal from '../UI/SubmitPromptModal'
 
 interface SidebarProps {
   stats: {
@@ -8,13 +9,16 @@ interface SidebarProps {
   }
   selectedCategory: string | null
   onCategoryFilter: (category: string | null) => void
+  onPromptSubmitted?: () => void
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ 
   stats, 
   selectedCategory, 
-  onCategoryFilter 
+  onCategoryFilter,
+  onPromptSubmitted
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const categoryGroups = [
     {
       name: 'System & General',
@@ -65,6 +69,24 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
   ]
 
+  const handleSubmitPrompt = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleModalClose = () => {
+    setIsModalOpen(false)
+  }
+
+  const handlePromptSubmitted = (newPrompt: any) => {
+    console.log('New prompt submitted:', newPrompt)
+    setIsModalOpen(false)
+    
+    // Refresh the prompt list if callback provided
+    if (onPromptSubmitted) {
+      onPromptSubmitted()
+    }
+  }
+
   return (
     <aside className="sidebar">
       <div className="sidebar__header">
@@ -94,7 +116,9 @@ const Sidebar: React.FC<SidebarProps> = ({
           <div key={group.name} className="sidebar__group">
             <h3 className="sidebar__group-title">{group.name}</h3>
             <div className="sidebar__group-categories">
-              {group.categories.map((category) => (
+              {group.categories
+                .filter(category => category.count > 0)
+                .map((category) => (
                 <button
                   key={category.name}
                   className={`sidebar__category-btn ${selectedCategory === category.name ? 'sidebar__category-btn--active' : ''}`}
@@ -105,7 +129,6 @@ const Sidebar: React.FC<SidebarProps> = ({
                       onCategoryFilter(category.name)
                     }
                   }}
-                  disabled={category.count === 0}
                 >
                   <span>{category.name}</span>
                   <span className="sidebar__category-count">{category.count}</span>
@@ -117,12 +140,19 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       <div className="sidebar__footer">
-        <div className="sidebar__info">
-          <p className="sidebar__info-text">
-            Browse {stats.totalPrompts.toLocaleString()} unique AI prompts across {Object.keys(stats.categories).length} categories.
-          </p>
-        </div>
+        <button 
+          className="sidebar__submit-btn"
+          onClick={handleSubmitPrompt}
+        >
+          Submit Prompt
+        </button>
       </div>
+
+      <SubmitPromptModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        onSubmit={handlePromptSubmitted}
+      />
     </aside>
   )
 }

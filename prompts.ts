@@ -63,18 +63,18 @@ const samplePrompts: Prompt[] = [
 let allPromptsCache: Prompt[] | null = null;
 let isLoading = false;
 
-export async function getAllPrompts(): Promise<Prompt[]> {
-  // Return cached data if available
-  if (allPromptsCache) {
-    return allPromptsCache;
+export async function getAllPrompts(limit?: number, offset?: number): Promise<{ prompts: Prompt[], total: number, hasMore: boolean }> {
+  // Return cached data if available and no pagination
+  if (allPromptsCache && limit === undefined && offset === undefined) {
+    return { prompts: allPromptsCache, total: allPromptsCache.length, hasMore: false };
   }
 
   // Prevent multiple simultaneous loads
   if (isLoading) {
     return new Promise((resolve) => {
       const checkCache = () => {
-        if (allPromptsCache) {
-          resolve(allPromptsCache);
+        if (allPromptsCache && limit === undefined && offset === undefined) {
+          resolve({ prompts: allPromptsCache, total: allPromptsCache.length, hasMore: false });
         } else {
           setTimeout(checkCache, 100);
         }
@@ -86,20 +86,44 @@ export async function getAllPrompts(): Promise<Prompt[]> {
   try {
     isLoading = true;
     
+    // Build URL with pagination parameters
+    const url = new URL('/api/prompts', window.location.origin);
+    if (limit !== undefined) url.searchParams.append('limit', limit.toString());
+    if (offset !== undefined) url.searchParams.append('offset', offset.toString());
+    
     // Try to load from API
-    const response = await fetch('/api/prompts');
+    const response = await fetch(url.toString());
     if (!response.ok) {
       throw new Error('Failed to fetch prompts from API');
     }
     
     const data = await response.json();
-    allPromptsCache = data.prompts as Prompt[];
-    return allPromptsCache;
+    
+    // Cache all results only if loading everything
+    if (limit === undefined && offset === undefined) {
+      allPromptsCache = data.prompts as Prompt[];
+    }
+    
+    return {
+      prompts: data.prompts as Prompt[],
+      total: data.total || data.prompts.length,
+      hasMore: data.hasMore || false
+    };
   } catch (error) {
     console.warn('Using sample prompts:', error);
     // Return sample data for development/fallback
-    allPromptsCache = samplePrompts;
-    return allPromptsCache;
+    const prompts = allPromptsCache || samplePrompts;
+    const paginatedPrompts = limit !== undefined 
+      ? prompts.slice(offset || 0, (offset || 0) + limit)
+      : prompts;
+    
+    if (!allPromptsCache) allPromptsCache = prompts;
+    
+    return {
+      prompts: paginatedPrompts,
+      total: prompts.length,
+      hasMore: limit !== undefined ? (offset || 0) + limit < prompts.length : false
+    };
   } finally {
     isLoading = false;
   }
@@ -121,7 +145,8 @@ export async function getPromptById(id: string): Promise<Prompt | null> {
 export async function searchPrompts(query: string): Promise<Prompt[]> {
   try {
     if (!query.trim()) {
-      return getAllPrompts();
+      const result = await getAllPrompts();
+      return result.prompts;
     }
     
     const response = await fetch(`/api/prompts?search=${encodeURIComponent(query)}`);

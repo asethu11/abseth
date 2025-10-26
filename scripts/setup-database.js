@@ -33,7 +33,7 @@ db.exec(`
 `);
 
 // Load prompts from JSON
-const promptsPath = path.join(__dirname, '../processed-prompts/unique-prompts.json');
+const promptsPath = path.join(__dirname, '../processed-prompts/all-prompts.json');
 const prompts = JSON.parse(fs.readFileSync(promptsPath, 'utf8'));
 
 console.log(`📊 Loading ${prompts.length} prompts into SQLite database...`);

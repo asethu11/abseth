@@ -30,6 +30,7 @@
   /* Border Colors */
   --color-border-primary: #333333;
   --color-border-secondary: #444444;
+  --color-border-hover: #4a4a4a;
   --color-border-focus: var(--color-orange-primary);
   
   /* Typography Scale */
